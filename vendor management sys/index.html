@@ -1,0 +1,146 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+    <div class="container">
+        <h1>Vendor Management System</h1>
+
+        <!-- Admin Login Section -->
+        <div id="admin-login" class="form-section">
+        <h2>Admin Login</h2>
+        <input type="text" id="admin-username" placeholder="Username" />
+        <input type="password" id="admin-password" placeholder="Password" />
+        <button id="admin-login-btn">Login</button>
+        <p id="login-error" class="error"></p>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="form-section">
+        <h2>Vendors Panel</h2>
+        <button onclick="showVendorForm()">New Vendor Register</button>
+        <button onclick="showSearchVendors()">Search Vendors</button>
+        <button onclick="showContractManagement()">Contract Management</button>
+        <button onclick="giveVendorsForReview()">Give Ratings and Review to Vendor</button>
+        <button onclick="showViewHighestRated()">View Highest Rated Vendor</button>
+        <button onclick="logout()">Logout</button>
+        <p id="admin-panel-error" class="error"></p>
+        </div>
+
+        <!-- Vendor Registration Form -->
+<div id="vendor-form" class="form-section" style="display: none;">
+    <h2>Register Vendor</h2>
+    <input type="text" id="vendor-id" placeholder="Vendor ID" required />
+    <input type="text" id="vendor-name" placeholder="Vendor Name" required />
+    
+    <!-- <label for="vendor-service">Service Type:</labe    l> -->
+    <select id="vendor-service" required>
+        <option value="">Select a Service</option>
+        <option value="catering">Catering</option>
+        <option value="decoration">Decoration</option>
+        <option value="lighting">Lighting</option>
+        <option value="dj-party">DJ Party</option>
+        <option value="stall">Stall</option>
+        <option value="housekeeping">Housekeeping</option>
+        <option value="room-service">Room Service</option>
+        <option value="parking-service">Parking Service</option>
+        <option value="others">Others</option> <!-- Option for custom service -->
+    </select>
+    <label for="custom-service" id="custom-service-label" style="display: none;">Please specify:</label>
+    <input type="text" id="custom-service" name="custom-service" style="display: none;" placeholder="Enter custom service type" />
+
+    <input type="text" id="vendor-location" placeholder="Location" required />
+    <input type="date" id="vendor-date" placeholder="Date" required />
+    
+    <button id="add-vendor-btn">Add Vendor</button>
+    <button onclick="showAdminPanel()">Back to Home</button>
+    <p id="vendor-form-error" class="error"></p>
+</div>
+
+ <!-- Contract Management Form -->
+<div id="contract-management-panel" class="form-section" style="display: none;">
+    <h2>Contract Management</h2>
+    <div id="vendor-list-con"></div>
+    <button onclick="saveContracts()">Save Contracts</button>
+    <button onclick="showAdminPanel()">Back to Home</button>
+    <p id="contract-form-error" style="color:red;"></p>
+</div>
+
+        <!-- Search Vendors -->
+        <div id="search-vendors" class="form-section" style="display: none;">
+        <h2>Search Vendors</h2>
+        <input type="text" id="vendor-search-name" placeholder="Search by Vendor Name" />
+        <button onclick="searchVendors('search')">Search</button>
+        <button onclick="searchVendors('searchAll')">Search All</button>
+        <ul id="vendor-list"></ul>
+        <button onclick="showAdminPanel()">Back to Home</button>
+        </div>
+        
+        
+
+        <div id="vendor-review-form" style="display:none;">
+            <h2>Rate and Review Vendors</h2>
+            <ul id="vendor-list-for-review"></ul>
+        </div>
+
+        <div id="review-form" style="display:none;">
+            <h2>Review Vendor: <span id="vendor-name-for-review"></span></h2>
+            <textarea id="review-text" placeholder="Write your review here..."></textarea>
+            <div id="rating-stars">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <p id="selected-rating">Rating: 0 Stars</p>
+            <input type="hidden" id="vendor-id-for-review">
+            <button onclick="submitReview()">Submit Review</button>
+            <p id="review-error" class="error"></p>
+        </div>
+
+        
+        <!-- Highest Rated Vendor -->
+        <div id="highest-rated" class="form-section" style="display: none;">
+        <h2>Highest Rated Vendor</h2>
+        <p id="highest-rated-vendor"></p>
+        <button onclick="showAdminPanel()">Back to Home</button>
+        </div>
+
+
+        <!-- Vendor Info and Reviews -->
+        <div id="vendor-info" class="form-section" style="display: none;">
+        <h2>Vendor Info</h2>
+        <p id="vendor-info-text"></p>
+        <p id="review-error" class="error"></p>
+        <h3>Reviews</h3>
+        <ul id="review-list"></ul>
+        <button onclick="showAdminPanel()">Back to Home</button>
+        <!-- <h3>Leave a Review</h3>
+        
+        <div id="star-rating" class="star-rating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <p id="selected-rating">Rating: 0 Stars</p>
+
+        <textarea id="review-text" placeholder="Write your review..."></textarea>
+        <button onclick="submitReview()">Submit Review</button>
+        <p id="review-error" class="error"></p>
+        <h3>Reviews</h3>
+        <ul id="review-list"></ul>
+        <button onclick="showAdminPanel()">Back to Home</button> -->
+        </div>
+    </div>
+    
+
+    <script src="script.js"></script>
+    </body>
+    </html>
